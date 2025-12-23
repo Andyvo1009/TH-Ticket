@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ticket_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: "ticket-booking"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/app/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ticket-booking"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ticket_backend
+    env_file:
+      - ./backend/.env
+    environment:
+      FLASK_ENV: production
+      # SQLAlchemy style (recommended)
+      DATABASE_URL: "postgresql+psycopg2://postgres:123@ticket_db:5432/ticket-booking"
+      # If you use Flask-SQLAlchemy default key instead:
+      # SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://postgres:123@db:5432/ticket-booking"
+      PYTHONUNBUFFERED: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - nginx
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: ticket_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      -  /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - backend
+volumes:
+  pgdata:

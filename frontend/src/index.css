@@ -1,0 +1,840 @@
+/* Body background color - grey/darker but lighter than navbar */
+body {
+	background-color: #222831;
+	min-height: 100vh;
+}
+
+/* Custom navbar sizing */
+.navbar-custom {
+	min-height: 80px; /* increase overall navbar height */
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	background-color: #305669;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Center the brand and align items vertically */
+.navbar-custom .container-lg {
+	display: flex;
+	align-items: center;
+  
+}
+
+/* White text for all nav links */
+.navbar-custom .nav-link {
+	padding-top: 0.6rem;
+	padding-bottom: 0.1rem;
+	font-size: 1.05rem;
+	color: #ffffff !important;
+}
+
+.navbar-custom .nav-link:hover {
+	color: #f8f9fa !important;
+	opacity: 0.8;
+}
+
+.navbar-custom .nav-link.active {
+	color: #ffffff !important;
+	font-weight: 500;
+}
+
+/* Dropdown menu styling */
+.navbar-custom .dropdown-menu {
+	background-color: #34495e;
+	border: none;
+}
+
+.navbar-custom .dropdown-item {
+	color: #ffffff;
+  cursor: pointer;
+}
+
+.navbar-custom .dropdown-item:hover {
+	background-color: #2c3e50;
+	color: #ffffff;
+}
+
+/* White navbar toggler icon for mobile */
+.navbar-custom .navbar-toggler {
+	padding: 0.45rem 0.5rem;
+	border-color: rgba(255,255,255,0.3);
+}
+
+.navbar-custom .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.navbar-brand{
+  width: 100px;
+  cursor: pointer;
+}
+/* Make the brand/logo bigger while keeping it responsive */
+.navbar-custom .navbar-brand img {
+	width: fit-content;
+	height: 80px;
+	object-fit: contain;
+}
+
+@media (max-width: 576px) {
+	.navbar-custom {
+		min-height: 64px;
+	}
+	.navbar-custom .navbar-brand img {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+/* Search input group - merge input and button into one visual bar */
+.input-group {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+}
+
+.input-group .form-control {
+	border-radius: 24px !important;
+	padding-right: 48px;
+	border: 1px solid rgba(255,255,255,0.3);
+	height: 42px;
+	background-color: rgba(255,255,255,0.1);
+	color: #ffffff;
+}
+
+.input-group .form-control::placeholder {
+	color: rgba(255,255,255,0.6);
+}
+
+.input-group .form-control:focus {
+	border-color: rgba(255,255,255,0.5);
+	box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.1);
+	background-color: rgba(255,255,255,0.15);
+	color: #ffffff;
+}
+
+/* Search button positioned INSIDE the input on the right */
+.search-btn {
+	position: absolute;
+	right: 4px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4rem 0.6rem;
+	border: none !important;
+	background: transparent !important;
+	z-index: 10;
+	height: 34px;
+	border-radius: 20px;
+}
+
+/* .search-btn:hover {
+	background: rgba(255,255,255,0.15) !important;
+} */
+
+/* Scoped icon rules: only affect icons used inside buttons, not brand/logo images */
+.button-icon,
+.search-icon,
+.icon,
+.btn > img {
+	width: 20px;
+	height: 20px;
+	/* object-fit: contain; */
+	margin-right: 0;
+	vertical-align: middle;
+	filter: brightness(0) invert(1);
+}
+
+/* Buttons styling for dark navbar */
+.navbar-custom .btn-outline-dark {
+	border-color: rgba(255,255,255,0.5);
+	color: #ffffff;
+}
+
+.navbar-custom .btn-outline-dark:hover {
+	background-color: rgba(255,255,255,0.1);
+	border-color: rgba(255,255,255,0.7);
+	color: #ffffff;
+}
+
+.navbar-custom .btn-outline-dark .button-icon {
+	filter: brightness(0) invert(1);
+	margin-right: 0.35rem;
+}
+
+.btn-outline-muted {
+	border: none;
+}
+.nav-right{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.login-btn b{
+  margin-left: 1rem;
+  background-color: transparent;
+  color:#ffffff;
+}
+
+/* Hero Carousel Styling */
+#heroCarousel {
+  max-width: 1200px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.carousel-item {
+  position: relative;
+  
+}
+
+.carousel-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+  z-index: 1;
+}
+
+.carousel-item img {
+  border-radius: 12px;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 0;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-content p {
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-content .btn {
+  animation: fadeInUp 1.2s ease-out;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  opacity: 0.8;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+  #heroCarousel {
+    margin: 1rem;
+    border-radius: 8px;
+  }
+  
+  .carousel-item img {
+    height: 350px !important;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Card Styling for Dark Theme */
+.card {
+  background-color: transparent !important;
+  border: none;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-img-top {
+  height: 220px !important;
+  object-fit: cover;
+}
+
+.card-swiper .card {
+  width: 100%;
+  height: 100%;
+}
+
+.card-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+/* .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+} */
+
+.card-title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.card-text {
+  color: #b8bdc4 !important;
+}
+
+.card-body {
+  background-color: #393E46;
+}
+
+.card-body small.text-muted {
+  color: #9ca3af !important;
+}
+
+
+.card-body .text-primary {
+  color: #60a5fa !important;
+  font-size: 1.1rem;
+}
+
+/* Section Headers */
+.section-header h2 {
+  color: #ffffff;
+}
+
+.section-header p {
+  color: #9ca3af;
+}
+
+/* Card Carousel Styling - Transparent with body color */
+#cardsCarousel {
+  position: relative;
+  background-color: #393E46 !important;
+  padding: 1rem 0;
+}
+
+#cardsCarousel .carousel-inner {
+  background-color: transparent !important;
+}
+
+#cardsCarousel .carousel-item {
+  background-color: transparent !important;
+  transition: opacity 0.8s ease-in-out;
+}
+
+#cardsCarousel.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-duration: 0.8s;
+  transition-property: opacity;
+}
+
+#cardsCarousel.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+
+#cardsCarousel .carousel-control-prev,
+#cardsCarousel .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#cardsCarousel .carousel-control-prev {
+  left: -60px;
+}
+
+#cardsCarousel .carousel-control-next {
+  right: -60px;
+}
+
+#cardsCarousel .carousel-control-prev:hover,
+#cardsCarousel .carousel-control-next:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#cardsCarousel .carousel-indicators {
+  bottom: -40px;
+}
+
+#cardsCarousel .carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: #6b7280;
+}
+
+#cardsCarousel .carousel-indicators button.active {
+  background-color: #1055C9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  #cardsCarousel .carousel-control-prev {
+    left: -20px;
+  }
+  
+  #cardsCarousel .carousel-control-next {
+    right: -20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #cardsCarousel .carousel-control-prev,
+  #cardsCarousel .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
+  
+  #cardsCarousel .carousel-control-prev {
+    left: -10px;
+  }
+  
+  #cardsCarousel .carousel-control-next {
+    right: -10px;
+  }
+}
+
+.btn-primary {
+  background-color: #34656D !important;
+  border-color: #34656D !important;
+  color: #ffffff !important;
+}
+
+/* Swiper Card Slider Styling */
+.card-slider-container {
+  position: relative;
+  padding: 2rem 0;
+  background-color: transparent;
+}
+
+.card-swiper {
+  padding: 1rem 3rem 3rem 3rem;
+}
+
+.card-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.card-swiper .swiper-slide .card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-swiper .card-img-top {
+  height: 200px !important;
+  object-fit: cover;
+}
+
+.card-swiper .swiper-button-next,
+.card-swiper .swiper-button-prev {
+  background: transparent;
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  padding: 5px;
+  color: #ffffff;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  /* transition: all 0.3s ease; */
+  box-shadow: none;
+  border: transparent;
+}
+
+.card-swiper .swiper-button-prev {
+  left: -25px;
+}
+
+.card-swiper .swiper-button-next {
+  right: -25px;
+}
+
+.card-swiper .swiper-button-next:after,
+.card-swiper .swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  padding: 8px;
+}
+
+.card-swiper .swiper-button-next:hover,
+.card-swiper .swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.1);
+  /* transform: translateY(-50%) scale(1.05); */
+  /* box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.8); */
+}
+
+.card-swiper .swiper-button-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.card-swiper .swiper-pagination {
+  bottom: -30px !important;
+  position: relative;
+}
+
+.card-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #6b7280;
+  opacity: 1;
+}
+
+.card-swiper .swiper-pagination-bullet-active {
+  background-color: #1055C9;
+}
+
+@media (max-width: 768px) {
+  .card-swiper {
+    padding: 1rem 2rem 3rem 2rem;
+  }
+  
+  .card-swiper .swiper-button-next,
+  .card-swiper .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .card-swiper .swiper-button-next:after,
+  .card-swiper .swiper-button-prev:after {
+    font-size: 16px;
+  }
+}
+
+/* Defensive rules: ensure Swiper uses horizontal layout and slides display inline-flex
+   in case some global rules override Swiper's defaults. These are specific to our
+   card-swiper to avoid touching other sliders. */
+.card-swiper .swiper-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+}
+
+.card-swiper .swiper-slide {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* Event Detail Page Styling */
+.event-detail-header {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+}
+
+.event-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+  z-index: 1;
+}
+
+.event-detail-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.card.bg-dark {
+  background-color: #3a3f47 !important;
+  border: none;
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+.card.bg-dark h3,
+.card.bg-dark h4 {
+  color: #ffffff;
+}
+
+.card.bg-dark p,
+.card.bg-dark ul {
+  color: #b8bdc4;
+}
+
+.card.bg-dark ul li {
+  margin-bottom: 0.5rem;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+}
+
+/* Review Card Styling */
+.review-card {
+  background-color: #3a3f47 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.review-avatar img,
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  background: linear-gradient(135deg, #1055C9 0%, #0d4299 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.review-card .bi-star-fill,
+.review-card .bi-star {
+  font-size: 1rem;
+  margin-right: 2px;
+}
+
+.review-card .btn-outline-secondary {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #b8bdc4;
+}
+
+.review-card .btn-outline-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Reviews Container Scrollbar */
+.reviews-container {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.reviews-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reviews-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb {
+  background: rgba(16, 85, 201, 0.6);
+  border-radius: 10px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 85, 201, 0.8);
+}
+
+/* Firefox scrollbar */
+.reviews-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 85, 201, 0.6) rgba(255, 255, 255, 0.05);
+}
+
+/* Login Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-in;
+}
+
+.modal-overlay.closing {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+.login-modal-card {
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  background-color: #ffffff!important;
+  border-radius: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.login-modal-card.closing {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.9) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.9) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+#userDropdown{
+  border-color: transparent !important;
+}
+
+
+.quantity-group .btn {
+  width: 40px;
+  border-radius: 0; /* remove rounded edges */
+  color: #ffffff !important;
+}
+
+.quantity-group .form-control {
+  border-radius: 0 !important; /* match the buttons */
+  text-align: center !important;
+  color: #ffffff !important;
+}
+
+.quantity-group .btn:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  
+}
+
+.quantity-group .btn:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+
+
+/* Footer Styles */
+footer {
+  margin-top: auto;
+  background-color: #1a1d23 !important;
+}
+
+footer .text-light{
+  color: grey !important;
+  font-weight: normal;
+}
+
+footer .text-light:hover{
+  color: white !important;
+}
+
+footer a {
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
+footer h5 {
+  color: #f9fafb;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+footer .social-links a:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+}
+
+footer hr {
+  opacity: 0.1;
+}

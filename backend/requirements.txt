@@ -1,0 +1,12 @@
+flask
+flask_sqlalchemy
+python-dotenv
+flask_jwt_extended
+flask_cors
+requests
+boto3
+redis
+payos
+psycopg2-binary
+sqlalchemy
+gunicorn

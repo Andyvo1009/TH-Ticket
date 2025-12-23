@@ -1,0 +1,138 @@
+/* Quill Editor Dark Theme */
+.ql-container {
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ql-editor {
+  background-color: #2d2d2d;
+  color: #fff;
+  min-height: 250px;
+  padding: 12px;
+  border-radius: 0 0 4px 4px;
+}
+
+.ql-editor.ql-blank::before {
+  color: #888;
+  font-style: italic;
+}
+
+.ql-toolbar {
+  background-color: #3a3a3a;
+  border: 1px solid #555;
+  border-radius: 4px 4px 0 0;
+}
+
+.ql-toolbar.ql-snow {
+  padding: 8px 4px;
+}
+
+.ql-snow .ql-stroke {
+  stroke: #ccc;
+}
+
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: #ccc;
+}
+
+.ql-snow .ql-picker-label {
+  color: #ccc;
+}
+
+.ql-snow .ql-picker-options {
+  background-color: #3a3a3a;
+  color: #ccc;
+}
+
+.ql-snow .ql-picker-item:hover,
+.ql-snow .ql-picker-item.ql-selected,
+.ql-snow .ql-picker-label:hover {
+  color: #fff;
+}
+
+.ql-snow .ql-picker-item.ql-selected .ql-selected-text {
+  color: #fff;
+}
+
+.ql-toolbar button:hover .ql-stroke,
+.ql-toolbar button.ql-active .ql-stroke,
+.ql-toolbar button:hover .ql-fill,
+.ql-toolbar button.ql-active .ql-fill,
+.ql-toolbar button:hover .ql-picker-label,
+.ql-toolbar button.ql-active .ql-picker-label {
+  color: #fff;
+  stroke: #fff;
+  fill: #fff;
+}
+
+.ql-snow .ql-picker-options {
+  border: 1px solid #555;
+  border-top: none;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 15px;
+}
+.ql-editor h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.ql-editor h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+
+.ql-editor h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #888;
+  padding-left: 16px;
+  margin: 8px 0;
+  color: #aaa;
+  font-style: italic;
+}
+
+.ql-editor code {
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: #ffa500;
+}
+
+.ql-editor pre {
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 12px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.ql-editor a {
+  color: #4fa3f5;
+  text-decoration: underline;
+}
+
+.ql-editor a:hover {
+  color: #5faef5;
+}
+
+.ql-editor ul,
+.ql-editor ol {
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+.ql-editor li {
+  margin: 5px 0;
+}

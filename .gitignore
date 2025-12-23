@@ -1,0 +1,46 @@
+backend/venv
+backend/__pycache__/
+backend/*.pyc
+.DS_Store
+.env
+# Node modules
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Local environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Editor directories and files
+frontend/.vscode/
+frontend/.idea/
+frontend/*.swp
+
+# TypeScript cache
+frontend/*.tsbuildinfo
+
+# Dependency directories
+frontend/.pnpm-store/
+
+# Mac / Windows system files
+frontend/.DS_Store
+frontend/Thumbs.db
+
+# Optional: coverage reports
+frontend/coverage/
+
+# Optional: local test or dev tools
+frontend/*.local
+
