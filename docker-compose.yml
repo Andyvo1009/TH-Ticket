@@ -25,10 +25,9 @@ services:
       - ./backend/.env
     environment:
       FLASK_ENV: production
-      # SQLAlchemy style (recommended)
+      # SQLAlchemy style 
       DATABASE_URL: "postgresql+psycopg2://postgres:123@ticket_db:5432/ticket-booking"
-      # If you use Flask-SQLAlchemy default key instead:
-      # SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://postgres:123@db:5432/ticket-booking"
+
       PYTHONUNBUFFERED: "1"
     depends_on:
       db:
