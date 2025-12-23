@@ -95,7 +95,7 @@ class AdminService:
             return {'success': False, 'message': 'Không tìm thấy người dùng'}, 404
         
         # Check if user has active bookings
-        active_bookings = Booking.query.filter_by(user_id=user_id, status='confirmed').count()
+        active_bookings = Booking.query.filter_by(user_id=user_id).count()
         if active_bookings > 0:
             return {'success': False, 'message': f'Không thể xóa người dùng có {active_bookings} đặt vé đang hoạt động'}, 400
         
