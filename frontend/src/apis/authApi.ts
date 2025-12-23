@@ -3,7 +3,6 @@ const base_url=import.meta.env.VITE_API_URL
 const authapi=axios.create({
   baseURL: base_url || '/api',  // change if needed
 });
-console.log('Auth API Base URL:', base_url);
 interface LoginCredentials {
   email: string;
   password: string;
@@ -30,12 +29,9 @@ export const authApi = {
   // Login API call
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     try {
-      // console.log('Attempting to log in with credentials:', credentials);
       const response = await authapi.post('/auth/login', credentials);
       const data = response.data as AuthResponse;
-      // console.log('Login response data:', data.message);
       if (!data.success) {
-        // console.log('Login failed:', data?.message);
         throw new Error(data?.message || 'Đăng nhập thất bại');
       }
 

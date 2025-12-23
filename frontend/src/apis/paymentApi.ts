@@ -1,5 +1,4 @@
 import api from "./baseApi";
-
 // Payment method types
 export type PaymentMethod = 'momo' | 'payos';
 

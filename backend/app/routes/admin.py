@@ -7,6 +7,7 @@ from app.models.user import User
 from app.models.event import Event
 from app.models.booking import Booking, BookingLine
 from app.models.payment import Payment, Cancellation
+from app.services.admin_service import AdminService
 from sqlalchemy import func, desc
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/api/admin')
@@ -85,6 +86,60 @@ def get_users():
     except Exception as e:
         print(f"Error fetching users: {str(e)}", flush=True)
         return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy danh sách người dùng: ' + str(e)}), 500
+
+
+@admin_bp.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    """Get user by ID with statistics"""
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        result, status_code = AdminService.get_user_by_id(user_id)
+        return jsonify(result), status_code
+    except Exception as e:
+        print(f"Error fetching user: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy thông tin người dùng: ' + str(e)}), 500
+
+
+@admin_bp.route('/users/<int:user_id>', methods=['PUT', 'OPTIONS'])
+def update_user(user_id):
+    """Update user information"""
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        data = request.get_json()
+        result, status_code = AdminService.update_user(user_id, data)
+        return jsonify(result), status_code
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error updating user: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi cập nhật người dùng: ' + str(e)}), 500
+
+
+@admin_bp.route('/users/<int:user_id>', methods=['DELETE', 'OPTIONS'])
+def delete_user(user_id):
+    """Delete a user"""
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        result, status_code = AdminService.delete_user(user_id)
+        return jsonify(result), status_code
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error deleting user: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi xóa người dùng: ' + str(e)}), 500
 
 
 # ==================== EVENT MANAGEMENT ====================
@@ -221,6 +276,36 @@ def update_event_approval(event_id):
         return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi cập nhật trạng thái phê duyệt: ' + str(e)}), 500
 
 
+@admin_bp.route('/events/<int:event_id>', methods=['DELETE', 'OPTIONS'])
+def delete_event(event_id):
+    """Delete an event"""
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        event = Event.query.get(event_id)
+        if not event:
+            return jsonify({'success': False, 'message': 'Không tìm thấy sự kiện'}), 404
+        
+        # Check if event has confirmed bookings
+        confirmed_bookings = Booking.query.filter_by(event_id=event_id, status='confirmed').count()
+        if confirmed_bookings > 0:
+            return jsonify({'success': False, 'message': f'Không thể xóa sự kiện có {confirmed_bookings} đặt vé đã xác nhận'}), 400
+        
+        db.session.delete(event)
+        db.session.commit()
+        
+        return jsonify({'success': True, 'message': 'Xóa sự kiện thành công'}), 200
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error deleting event: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi xóa sự kiện: ' + str(e)}), 500
+
+
 # ==================== BOOKING MANAGEMENT ====================
 
 @admin_bp.route('/bookings', methods=['GET'])
@@ -303,9 +388,48 @@ def get_all_bookings():
         return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy danh sách đặt vé: ' + str(e)}), 500
 
 
+@admin_bp.route('/bookings/<int:booking_id>', methods=['GET'])
+def get_booking(booking_id):
+    """Get booking by ID"""
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        result, status_code = AdminService.get_booking_by_id(booking_id)
+        return jsonify(result), status_code
+    except Exception as e:
+        print(f"Error fetching booking: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy thông tin đặt vé: ' + str(e)}), 500
+
+
+@admin_bp.route('/bookings/<int:booking_id>/status', methods=['PUT', 'OPTIONS'])
+def update_booking_status(booking_id):
+    """Update booking status"""
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        data = request.get_json()
+        status = data.get('status')
+        reason = data.get('reason')
+        
+        result, status_code = AdminService.update_booking_status(booking_id, status, reason)
+        return jsonify(result), status_code
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error updating booking status: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi cập nhật trạng thái đặt vé: ' + str(e)}), 500
+
+
 # ==================== STATISTICS & DASHBOARD ====================
 
 @admin_bp.route('/stats', methods=['GET'])
+@admin_bp.route('/dashboard/stats', methods=['GET'])
 def get_stats():
     """Get system statistics"""
     auth_error = admin_required()
@@ -352,3 +476,56 @@ def get_stats():
     except Exception as e:
         print(f"Error fetching dashboard stats: {str(e)}", flush=True)
         return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy thống kê: ' + str(e)}), 500
+
+
+@admin_bp.route('/dashboard/recent-bookings', methods=['GET'])
+def get_recent_bookings():
+    """Get recent bookings"""
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        limit = int(request.args.get('limit', 10))
+        result, status_code = AdminService.get_recent_bookings(limit)
+        return jsonify(result), status_code
+    except Exception as e:
+        print(f"Error fetching recent bookings: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy đặt vé gần đây: ' + str(e)}), 500
+
+
+@admin_bp.route('/dashboard/top-events', methods=['GET'])
+def get_top_events():
+    """Get top events by tickets sold"""
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        limit = int(request.args.get('limit', 10))
+        result, status_code = AdminService.get_top_events(limit)
+        return jsonify(result), status_code
+    except Exception as e:
+        print(f"Error fetching top events: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy sự kiện hàng đầu: ' + str(e)}), 500
+
+
+# ==================== PAYMENT MANAGEMENT ====================
+
+@admin_bp.route('/payments', methods=['GET'])
+def get_payments():
+    """Get all payments with filtering and pagination"""
+    auth_error = admin_required()
+    if auth_error:
+        return auth_error
+    
+    try:
+        status = request.args.get('status')
+        page = int(request.args.get('page', 1))
+        limit = int(request.args.get('limit', 10))
+        
+        result, status_code = AdminService.get_all_payments(status, page, limit)
+        return jsonify(result), status_code
+    except Exception as e:
+        print(f"Error fetching payments: {str(e)}", flush=True)
+        return jsonify({'success': False, 'message': 'Đã xảy ra lỗi khi lấy danh sách thanh toán: ' + str(e)}), 500

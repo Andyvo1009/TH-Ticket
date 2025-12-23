@@ -11,7 +11,7 @@ export default function PaymentCancel() {
     if (orderCode) {
       paymentApi.failPayment(orderCode);
     }
-  }, [orderCode]);
+  }, []);
 
   return (
     <>

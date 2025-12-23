@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Create 1 shared axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',  // change if needed
+  baseURL: import.meta.env.VITE_API_URL || '/api',  // change if needed
 });
 
 // Intercept all responses (success or error)
@@ -12,7 +12,6 @@ api.interceptors.response.use(
 
   (error) => {
     // Check the status code
-    // console.log("API response error:", error.response);
       if (error.response?.status === 401) {
     const message = error.response?.data?.message || "";
 
