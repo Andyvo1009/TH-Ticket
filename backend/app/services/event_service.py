@@ -63,7 +63,7 @@ class EventService:
         sql = text(f"""
             SELECT
                 e.event_id as id,
-                e.name,
+                e.name as title,
                 e.description,
                 e.image_url as image,
                 to_char(e.start_time, 'YYYY-MM-DD HH:MI AM') as date,

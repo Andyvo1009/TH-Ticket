@@ -292,9 +292,9 @@ def delete_event(event_id):
             return jsonify({'success': False, 'message': 'Không tìm thấy sự kiện'}), 404
         
         # Check if event has confirmed bookings
-        confirmed_bookings = Booking.query.filter_by(event_id=event_id, status='confirmed').count()
+        confirmed_bookings = Booking.query.filter_by(event_id=event_id).count()
         if confirmed_bookings > 0:
-            return jsonify({'success': False, 'message': f'Không thể xóa sự kiện có {confirmed_bookings} đặt vé đã xác nhận'}), 400
+            return jsonify({'success': False, 'message': f'Không thể xóa sự kiện có {confirmed_bookings}người đặt vé '}), 400
         
         db.session.delete(event)
         db.session.commit()
